@@ -1,4 +1,4 @@
-# 用 ledger 管理 CKB 地址
+# 用 ledger 管理 ckb 地址
 
 ## 给 ckb-cli 安装 ledger 插件
 

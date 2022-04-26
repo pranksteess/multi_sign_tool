@@ -1,7 +1,10 @@
 # 多签助手
+本项目主要用于处理 ckb 的多签交易，分为 client 端和 server 端。
+client 是指多签的各方，任何一方都可以使用 client 端发起一笔多签交易。
+server 端主要是用于整合各方交易并最终发送交易。
+
 ## client
 ### 依赖
-
 * [ckb-cli](https://github.com/dotbitHQ/ckb-cli/tree/das-cli) (与本项目放到同级目录)
   ``` bash
   git clone https://github.com/dotbitHQ/ckb-cli.git
@@ -9,9 +12,9 @@
   cargo build --release
   # 新的 ckb-cli 会生成在 target/release 目录 
   ```
-* [ckb-node](https://github.com/nervosnetwork/ckb) >= v0.101.3 (参照项目文档说明搭建节点即可)
-* [das-register](https://github.com/dotbitHQ/das-register) >= v1.1.2
 * python3
+
+__client 虽然不需要搭建 [das-register](https://github.com/dotbitHQ/das-register) >= v1.1.2，但需要与其做交互 __
 
 ### 安装
 ``` bash
@@ -23,7 +26,7 @@ pip3 install -r requirements.txt
 ### 使用
 先修改 multi\_sign\_client.py 里的 `CKB_CLI` 为本地 ckb-cli 的路径
 
-_如果本机处于离线状态，那么就需要使用 -s 参数让别人来协助推送 sig_
+_如果本地处于离线状态，那么就需要使用 -s 参数让别人来协助推送 sig_
 
 ``` bash
 python3 multi_sign_client.py
@@ -49,18 +52,21 @@ python3 multi_sign_client.py
 * `-c` 当需要给当前这笔交易添加一些解释说明的时候可以用这个参数，记得加上双引号
 
 
-### client 端为 ledger 的情况
-首先需要参照 [文档](https://github.com/pranksteess/Howtouseledgercontrolckbaddress.md) 设置好用 ledger 管理 ckb 地址
+__本项目允许使用 ledger 作为 client 端，需要参照 [文档](https://github.com/pranksteess/multi_sign_tool/blob/main/Howtouseledgercontrolckbaddress.md) 做好相应的设置即可__
 
-正常情况下，只需要操作一次 ledger，但多签发起方有可能会签两次。
-
-第一次是为了获取 digest，第二次才是真正签名 digest 获得 signature。
-
-之所以是`可能`，这是因为 ledger 的 nervos app 有个 bug，当 CKB 交易 json 太大时，第一次直接签名 json 文件会报错，由于 client 脚本兼容了这种错误，所以这种情况就没有`第一次签名`的过程
-
-__update: 签两次的问题已经在本项目这一层兼容并修复了，现在每次发起只会签一次__
 
 ## server
+### 依赖
+* [ckb-cli](https://github.com/dotbitHQ/ckb-cli/tree/das-cli) (与本项目放到同级目录)
+  ``` bash
+  git clone https://github.com/dotbitHQ/ckb-cli.git
+  git checkout das-cli
+  cargo build --release
+  # 新的 ckb-cli 会生成在 target/release 目录 
+  ```
+* [ckb-node](https://github.com/nervosnetwork/ckb) >= v0.101.3 (参照项目文档说明搭建节点即可)
+* python3
+
 ### 安装
 ``` bash
 git clone https://github.com/pranksteess/multi_sign_tool.git
