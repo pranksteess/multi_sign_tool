@@ -1,4 +1,5 @@
 # 用 ledger 管理 ckb 地址
+本项目主要用于如何使用 ledger 创建 ckb 地址，并与 ckb-cli 联动处理复杂交易的签名场景。
 
 ## 给 ckb-cli 安装 ledger 插件
 

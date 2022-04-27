@@ -1,7 +1,7 @@
 # 多签助手
 本项目主要用于处理 ckb 的多签交易，分为 client 端和 server 端。
 client 是指多签的各方，任何一方都可以使用 client 端发起一笔多签交易。
-server 端主要是用于整合各方交易并最终发送交易。
+server 端主要是用于同步签名内容、整合各方的签名结果，并发送最终的合法交易。
 
 ## client
 ### 依赖
@@ -14,7 +14,7 @@ server 端主要是用于整合各方交易并最终发送交易。
   ```
 * python3
 
-__client 虽然不需要搭建 [das-register](https://github.com/dotbitHQ/das-register) >= v1.1.2，但需要与其做交互 __
+_client 虽然不需要搭建 [das-register](https://github.com/dotbitHQ/das-register) >= v1.1.2，但需要与其做交互_
 
 ### 安装
 ``` bash
@@ -52,7 +52,7 @@ python3 multi_sign_client.py
 * `-c` 当需要给当前这笔交易添加一些解释说明的时候可以用这个参数，记得加上双引号
 
 
-__本项目允许使用 ledger 作为 client 端，需要参照 [文档](https://github.com/pranksteess/multi_sign_tool/blob/main/Howtouseledgercontrolckbaddress.md) 做好相应的设置即可__
+_本项目允许使用 ledger 作为 client 端，需要参照 [文档](https://github.com/pranksteess/multi_sign_tool/blob/main/Howtouseledgercontrolckbaddress.md) 做好相应的设置即可_
 
 
 ## server
